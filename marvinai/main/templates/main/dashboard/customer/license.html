@@ -1,0 +1,18 @@
+{% extends 'main/dashboard/view_customer.html' %}
+{% block div_content %}
+                    <div class="card-header">
+                                <i class="fa fa-certificate"></i><strong class="card-title pl-2">License</strong>
+                    </div>
+                    <div class="card-body" style="border:1px solid #E5E5E5; background-color:white;">
+			    <div class="mx-auto d-block">
+                                <h5 class="text-sm-center mt-2 mb-1"><p>License Expires in</p></h5>
+                                <div class="location text-sm-center"><i class="fa fa-calendar"></i><h5 style="color:white;"><output style="background-color: {{ color }}"> {{ days_left }} days </output></h5></div>
+                                 </div>
+                                 <hr>
+                                 <div class="card-text text-sm-center">
+                                   <a href="#"><i class="fa fa-certificate pr-1"> License will be expired on:</i></a>
+                                   <a><p>{{ date }}</p></a>
+                                 </div>
+                     </div>
+{% endblock %}
+

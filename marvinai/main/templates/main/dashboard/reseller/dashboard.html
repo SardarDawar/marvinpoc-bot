@@ -1,0 +1,18 @@
+{% extends 'main/dashboard/view_reseller.html' %}
+{{ block.super }}
+{% block div_content %}
+                    <div class="card-header">
+                                <i class="fa fa-bar-chart-o"></i><strong class="card-title pl-2">Dashboard</strong>
+                    </div>
+                    <div class="card-body">
+                       <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+					    <a><i style="font-size:16px; font-family:sans-serif; font-weight:400; color:#878787;">Account</i><span class="badge badge-success pull-right">{{ reseller_details.reseller_name  }}</span></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                            <a><i style="font-size:16px; font-family:sans-serif; font-weight:400; color:#878787;">Domain</i><span class="badge badge-success pull-right">{% filter lower %}{{ reseller_details.reseller_name  }}{% endfilter %}.marvinaiapp.com</span></a>
+                                    </li>
+                           </ul>
+                     </div>
+{% endblock %}
+

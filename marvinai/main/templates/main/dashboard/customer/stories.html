@@ -1,0 +1,93 @@
+{% extends 'main/dashboard/view_customer.html' %}
+{% block div_content %}
+                    <div class="card-header">
+                                <i class="fa fa-book"></i><strong class="card-title pl-2">Stories</strong>
+                    </div>
+                    <div class="card-body" style="border:1px solid #E5E5E5; background-color:white; height:80.6vh; overflow:auto;">
+			    <div class="row">
+	           <!--div col-sm-6 is for adding Response data in the left side of page -->
+                     <div id="response-edit-div" class="col-sm-6">
+		      	<!--start row -->
+		        <div class="row">
+		           <div class="col-md-4">
+				   <h5><strong>Add Story</strong></h5>
+		           </div>
+		           <div class="col-2">
+			       <div>
+			               <button id="show_divs_stories" type="button" class="btn btn-outline-primary btn-sm"><h4>&nbsp;+&nbsp;</h4></button>
+                               </div>
+		           </div>
+
+		       </div>
+		       <!--end row -->
+
+		       <!--start row -->
+                       <div class="row">
+                               <br></br>
+                       </div>
+		       <!--end row -->
+
+		       <!--div_nlu is to wrap output field and associated input field -two columns inside the row-->
+                        <div id="div_story_name" style="display:none;" class="row">
+                               <div class="col-2">
+                               </div>
+                               <div>
+				       <textarea id="input_story_name" placeholder="Write your story..." rows="1" class="form-control t-text-area" style="height:200px; width:250px;"></textarea>
+                               </div>
+			       <div><input type="hidden"/></div>
+                           </div>
+			   <!--end row -->
+
+                          <!--start row -->
+                          <div class="row">
+                               <br></br>
+                          </div>
+			  <!--end row -->
+
+
+			   <!--start row -->
+                           <div class="row">
+                               <br></br>
+                          </div>
+                           <!--end row -->
+
+
+			  <!--div_button is another row with save button-->
+			  <div id="div_button_stories" style="display:none; margin-left:4%;" class="row">
+			      <div class="col-sm-3">
+                                 <button id="save_stories_data" style="float:right;" type="button" class="btn btn-outline-success"><h5>Save</h5></button>
+			      </div>
+			      <div class="col-sm-3">
+                                 <button id="cancel_stories" style="float:left;" type="button" class="btn btn-outline-danger"><h5>Cancel</h5></button>
+                              </div>
+                          </div>
+			  <!--end row -->
+
+			   <!--start row -->
+                           <div class="row">
+                               <br></br>
+                          </div>
+                           <!--end row -->
+
+			   <!-- start success div -->
+                          <div id="form-stories" style="display:none;">
+			          <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                                        <span class="badge badge-pill badge-success">Success</span>
+                                         <p style="font-size:14px;">Refresh page to see new stories on right side. Remember to train the bot.</p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+			  </div>
+                   </div>
+		    <!--div col-sm-6 is for showing Response data in the right side of page -->
+                   <div id="dynamic-context" class="col-sm-6">
+                     <pre id="stories" style="overflow:auto; white-space:pre-wrap; font-size:12px;">
+{{ text }}
+                     </pre>
+                   </div>
+                  </div>
+                </div>
+{% endblock %}
+

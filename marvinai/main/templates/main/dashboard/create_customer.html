@@ -1,0 +1,140 @@
+
+{% extends 'main/dashboard/index.html' %}
+
+{% block extended_menu %}
+{% if form.errors %}
+{% for field in form %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{ error|escape }}</strong>
+  
+
+</div>
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+{% if form_1.errors %}
+{% for field in form_1 %}
+{% for error in field.errors %}
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {% if error == 'A user with that username already exists.' %} 
+    <strong>A user with this Email already exists.</strong>
+    {% elif error == 'This field is required.' %}
+  
+    <strong>{{field.name}} is required.</strong>
+    {% else %}
+    <strong>{{ error|escape }}</strong>
+    {% endif %}
+   
+</div>
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+<div class="card-header">
+    <i class="fa fa-home"></i><strong class="card-title pl-2">Create New Customer</strong>
+ 
+
+</div>
+<div class="card-body" style="border:1px solid #E5E5E5; background-color:white; height:80.6vh; overflow:auto;">
+    <form action="#" method="post" class="" enctype="multipart/form-data"> 
+        {% csrf_token %}
+      <!-- {{form.as_p}}
+      {{form_1.as_p}} -->
+
+
+
+
+
+
+      
+ <!-- ***************** FORM - ResellerForm ************************ -->
+    <div class="form-group">
+            <label >Application Name</label>
+            <input type="text" name="Application_name" id="id_Application_name"  class="form-control"  placeholder="Application name">
+    </div>
+    <div class="form-group">
+        <label >Reseller</label>
+        <select name="reseller" class="form-control">
+            {% for i in form.reseller %}
+            <option  value="{{i.id}}">{{i}}</option>
+            {% endfor %}
+        </select>
+</div>
+<!--********************************************************************-->
+ <!-- ***************** FORM_1 - registerForm  ************************ -->
+        <div class="form-group">
+            <label for="id_email">Email Address</label>
+            <input type="text" name="username" required id="id_username" class="form-control" placeholder="Enter Email">
+
+        </div>
+        
+        <div class="form-group">
+            <label>Domain</label>
+            <input type="text" name="domain" id="id_domain" class="form-control" placeholder="domain name">
+        </div>
+        <!-- <div class="form-group">
+            <label for="id_username">Username</label>
+            <input type="email" name="username" maxlength="150" required id="id_username" class="form-control"
+                placeholder="Enter User">
+            <small id="usernameHelpInline" class="text-muted">
+                Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+            </small>
+        </div>
+      -->
+      <div class="form-group">
+        <label>Logo</label>
+        <input type="file" name="logo" id="id_logo" >
+    </div>
+      
+        <div class="form-group">
+            <label for="id_first_name">First name</label>
+            <input type="text" name="first_name" maxlength="30" id="id_first_name" class="form-control"
+                placeholder="Enter First Name">
+        </div>
+
+        <div class="form-group">
+            <label for="id_last_name">Last name</label>
+            <input type="text" name="last_name" maxlength="150" id="id_last_name" class="form-control"
+                placeholder="Enter Last Name">
+        </div>
+
+        <div class="form-group">
+            <label for="id_password">Password</label>
+            <input type="password" name="password" required id="id_password" class="form-control"
+                placeholder="Enter Password">
+            <small id="passwordHelpInline" class="text-muted">
+                <ul>
+                    <li>Your password can&#39;t be too similar to your other personal information.</li>
+                    <li>Your password must contain at least 8 characters.</li>
+                    <li>Your password can&#39;t be a commonly used password.</li>
+                    <li>Your password can&#39;t be entirely numeric.</li>
+                </ul>
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="id_password2">Confirm Password</label>
+            <input type="password" name="password2" required id="id_password2" class="form-control"
+                placeholder="Enter Confirm Password">
+            <small id="passwordHelpInline" class="text-muted">
+                Both Passwords should be same.
+            </small>
+        </div>
+
+  
+<!--********************************************************************-->
+
+        <div class="form-actions form-group">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+{% endblock %}

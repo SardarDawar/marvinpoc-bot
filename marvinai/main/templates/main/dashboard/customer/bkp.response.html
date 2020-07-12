@@ -1,0 +1,106 @@
+{% extends 'main/dashboard/view_customer.html' %}
+{% block div_content %}
+                    <div class="card-header">
+                                <i class="fa fa-edit (alias)"></i><strong class="card-title pl-2">Response</strong>
+                    </div>
+                    <div class="card-body" style="border:1px solid #E5E5E5; background-color:white; height:80.6vh; overflow:auto;">
+			    <div class="row">
+	           <!--div col-sm-6 is for adding Response data in the left side of page -->
+                     <div id="response-edit-div" class="col-sm-6">
+		      	<!--start row -->
+		        <div class="row">
+		           <div class="col-md-4">
+				   <h5><response>Add Response</response></h5>
+		           </div>
+		           <div class="col-2">
+			       <div>
+			               <button id="show_divs" type="button" class="btn btn-outline-primary btn-sm"><h4>&nbsp;+&nbsp;</h4></button>
+                               </div>
+		           </div>
+
+		       </div>
+		       <!--end row -->
+
+		       <!--start row -->
+                       <div class="row">
+                               <br></br>
+                       </div>
+		       <!--end row -->
+
+		       <!--div_response is to wrap output field and associated input field -two columns inside the row-->
+                        <div id="div_response_name" style="display:none;" class="row">
+                               <div class="col-md-4">
+                                       <h5>Response Name: </h4>
+                               </div>
+                               <div>
+                                       <input id="input_response" class="form-control" aria-required="true" style="float:left; display:block; height:30px;" type="text" name="response_name">
+                               </div>
+			       <div><input type="hidden"/></div>
+                           </div>
+			   <!--end row -->
+
+                          <!--start row -->
+                          <div class="row">
+                               <br></br>
+                          </div>
+			  <!--end row -->
+
+                           <!--div_response is to wrap output field and dynamic added input fields with button -two columns inside the row-->
+			   <div id="div_response" style="display:none;" class="row">
+                               <div class="col-md-4">
+                                       <h5>Bot Response: </h4>
+                               </div>
+                               <div class="col-sm-6" style="float:left;">
+				       <div class="row" id="input_fields_wrap">
+                                           <div><input type="text" id="textbox_static" class="form-control" aria-required="true" name="mytext" style="margin-bottom:2px; height:30px;"></div>
+					   <!-- <div><button type="button" id="add_field_button" class="btn btn-outline-primary btn-sm"><h5>&nbsp;+&nbsp;</h5></button></div>-->
+				       </div>
+                               </div>
+                           </div>
+			   <!--end row -->
+
+			   <!--start row -->
+			   <div class="row">
+                               <br></br>
+                          </div>
+                           <!--end row -->
+
+			  <!--div_button is another row with save button-->
+			  <div id="div_button_response" style="display:none; margin-left:4%;" class="row">
+			      <div class="col-sm-4">
+                                 <button id="save_response_data" style="float:right;" type="button" class="btn btn-outline-success"><h5>Save</h5></button>
+			      </div>
+			      <div class="col-md-4">
+                                 <button id="cancel_response" style="float:left;" type="button" class="btn btn-outline-danger"><h5>Cancel</h5></button>
+                              </div>
+                          </div>
+			  <!--end row -->
+
+			   <!--start row -->
+                           <div class="row">
+                               <br></br>
+                          </div>
+                           <!--end row -->
+
+			   <!-- start success div -->
+                          <div id="form-response" style="display:none;">
+			          <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                                        <span class="badge badge-pill badge-success">Success</span>
+                                         <p style="font-size:14px;">Response added succesfully. Remember to train the bot.</p>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+			  </div>
+                   </div>
+		    <!--div col-sm-6 is for showing Response data in the right side of page -->	
+                   <div id="dynamic-context" class="col-sm-6">
+                     <pre id="response" style="overflow:auto; white-space:pre-wrap; font-size:12px;">
+{{ text }}
+                     </pre>
+                   </div>
+                  </div>
+                </div>
+{% endblock %}
+

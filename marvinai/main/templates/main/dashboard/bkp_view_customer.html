@@ -1,0 +1,1337 @@
+{% extends 'main/dashboard/index.html' %}
+{% load static %}
+{% block head %}
+<style>
+aside.left-panel-custom {
+  background: #fff;
+  height: 100vh;
+  padding: 0;
+  vertical-align: top;
+  width: 280px;
+  -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+          box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 55px;
+  z-index: 999; }
+  aside.left-panel:hover {
+    overflow-x: scroll; }
+
+.open aside.left-panel-custom:hover {
+  overflow-x: inherit; }
+
+.small-device .right-panel {
+  margin-left: 83px; }
+
+.navbar {
+  background: #fff;
+  border-radius: 0;
+  border: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: top; }
+  .navbar .main-menu {
+    float: left;
+    padding: 0;
+    padding-bottom: 50px; }
+  .navbar .menu-title {
+    color: #41434d;
+    clear: both;
+    display: block;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 50px;
+    padding: 0;
+    text-transform: uppercase;
+    width: 100%; }
+  .navbar .navbar-nav {
+    float: none;
+    position: relative; }
+    .navbar .navbar-nav > li {
+      padding-left: 30px;
+      padding-right: 30px; }
+      .navbar .navbar-nav > li.active {
+        background: #fafafa; }
+    .navbar .navbar-nav li {
+      width: 100%; }
+      .navbar .navbar-nav li.active .menu-icon, .navbar .navbar-nav li:hover .toggle_nav_button:before,
+      .navbar .navbar-nav li .toggle_nav_button.nav-open:before {
+        color: #03a9f3; }
+      .navbar .navbar-nav li .dropdown-toggle:after {
+        display: none; }
+      .navbar .navbar-nav li > a {
+        background: none !important;
+        color: #607d8b;
+        display: inline-block;
+        font-size: 14px;
+        line-height: 26px;
+        padding: 10px 0;
+        position: relative;
+        width: 100%; }
+        .navbar .navbar-nav li > a:hover, .navbar .navbar-nav li > a:hover .menu-icon {
+          color: #03a9f3; }
+        .navbar .navbar-nav li > a .menu-icon {
+          color: #607d8b;
+          float: left;
+          margin-top: 8px;
+          width: 55px;
+          text-align: left;
+          z-index: 9; }
+        .navbar .navbar-nav li > a .menu-title-text {
+          font-size: 14px; }
+        .navbar .navbar-nav li > a .badge {
+          border-radius: 0;
+          font-weight: 600;
+          float: right;
+          margin: 6px 0 0 0;
+          padding: 0.4em 0.5em; }
+      .navbar .navbar-nav li.menu-item-has-children {
+        position: relative; }
+        .navbar .navbar-nav li.menu-item-has-children a {
+          line-height: 30px; }
+          .navbar .navbar-nav li.menu-item-has-children a:before {
+            content: "";
+            position: absolute;
+            top: 23px;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: #607d8b #607d8b transparent transparent;
+            -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+            -webkit-transition: all .25s ease;
+            transition: all .25s ease; }
+          .navbar .navbar-nav li.menu-item-has-children a:hover:before {
+            border-color: #03a9f3 #03a9f3 transparent transparent; }
+        .navbar .navbar-nav li.menu-item-has-children .sub-menu {
+          background: #fff;
+          border: none;
+          -webkit-box-shadow: none;
+                  box-shadow: none;
+          overflow-y: hidden;
+          padding: 0 0 0 35px; }
+          .navbar .navbar-nav li.menu-item-has-children .sub-menu li {
+            position: relative; }
+          .navbar .navbar-nav li.menu-item-has-children .sub-menu i {
+            color: #c8c9ce;
+            float: left;
+            padding: 0;
+            position: absolute;
+            left: 0;
+            font-size: 14px;
+            top: 9px; }
+          .navbar .navbar-nav li.menu-item-has-children .sub-menu a {
+            padding: 2px 0 2px 30px; }
+            .navbar .navbar-nav li.menu-item-has-children .sub-menu a:before {
+              content: '';
+              display: none; }
+            .navbar .navbar-nav li.menu-item-has-children .sub-menu a .menu-icon {
+              top: 13px;
+              text-align: left;
+              width: 25px; }
+        .navbar .navbar-nav li.menu-item-has-children.show a:before {
+          border-color: transparent #607d8b #607d8b transparent;
+          top: 20px;
+          right: -5px; }
+        .navbar .navbar-nav li.menu-item-has-children.show a:hover:before {
+          border-color: transparent #03a9f3 #03a9f3 transparent; }
+        .navbar .navbar-nav li.menu-item-has-children.show .sub-menu {
+          max-height: 1000px;
+          opacity: 1;
+          position: static !important; }
+
+.navbar .navbar-nav > .active > a,
+.navbar .navbar-nav > .active > a:focus,
+.navbar .navbar-nav > .active > a:hover {
+  color: #03a9f3; }
+
+.navbar-nav li span.count {
+  background: #a9d86e;
+  border-radius: 50%;
+  color: #fff;
+  font-family: 'Open Sans';
+  font-size: 9px;
+  font-weight: 700;
+  float: right;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  margin-right: 15px;
+  text-align: center; }
+
+.open .navbar .navbar-brand.hidden {
+  display: block; }
+.open .sub-menu .subtitle {
+  display: block;
+  font-size: 15px;
+  line-height: 35px;
+  color: #607d8b;
+  border-bottom: 1px solid rgba(96, 125, 139, 0.15); }
+.open .sub-menu i {
+  left: 15px !important; }
+
+.sub-menu .subtitle {
+  display: none; }
+  .sub-menu .subtitle > .menu-icon {
+    display: none; }
+
+.open aside.left-panel-custom {
+  max-width: 83px;
+  width: 83px; }
+  .open aside.left-panel-custom .navbar .navbar-header {
+    padding: 0; }
+  .open aside.left-panel-custom .navbar .navbar-brand {
+    display: none; }
+    .open aside.left-panel-custom .navbar .navbar-brand.hidden {
+      display: block !important;
+      text-align: center;
+      width: 100%; }
+      .open aside.left-panel-custom .navbar .navbar-brand.hidden img {
+        max-width: 100%;
+        margin: 0 auto; }
+    .open aside.left-panel-custom .navbar .navbar-brand.d-md-none {
+      display: block !important;
+      margin: 13px 0 0;
+      min-height: 67px;
+      padding: 0;
+      text-align: center; }
+  .open aside.left-panel-custom .navbar .navbar-nav:before {
+    display: none !important; }
+  .open aside.left-panel-custom .navbar .navbar-nav li {
+    position: relative;
+    padding: 0 15px; }
+    .open aside.left-panel-custom .navbar .navbar-nav li a {
+      font-size: 0;
+      z-index: 0;
+      -webkit-transition: none;
+      transition: none; }
+      .open aside.left-panel-custom .navbar .navbar-nav li a .menu-icon {
+        font-size: 20px;
+        z-index: -1;
+        text-align: center;
+        width: inherit; }
+      .open aside.left-panel-custom .navbar .navbar-nav li a .menu-title-text {
+        font-size: 0; }
+      .open aside.left-panel-custom .navbar .navbar-nav li a .badge {
+        display: none; }
+    .open aside.left-panel-custom .navbar .navbar-nav li > a {
+      max-width: 60px;
+      padding-left: 0; }
+    .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children {
+      overflow: hidden; }
+      .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children ul {
+        padding-left: 0; }
+      .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children .sub-menu {
+        display: block;
+        left: 83px;
+        top: 0; }
+        .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children .sub-menu li a {
+          display: block;
+          font-size: 14px;
+          max-width: inherit;
+          padding: 2px 15px 2px 25px;
+          width: 100%; }
+          .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children .sub-menu li a .menu-icon {
+            text-align: center; }
+      .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children.show {
+        overflow: visible; }
+        .open aside.left-panel-custom .navbar .navbar-nav li.menu-item-has-children.show .sub-menu {
+          position: absolute !important;
+          width: 180px;
+          -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+                  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08); }
+    .open aside.left-panel-custom .navbar .navbar-nav li span.count {
+      display: none;
+      margin-right: 5px;
+      z-index: 1; }
+    .open aside.left-panel-custom .navbar .navbar-nav li.active a:after {
+      content: '';
+      display: none; }
+  .open aside.left-panel-custom .navbar .navbar-nav .menu-title {
+    font-size: 0;
+    line-height: 0;
+    opacity: 0;
+    padding: 0; }
+  .open aside.left-panel-custom .menutoggle {
+    background-color: #dc3545;
+    color: #fff !important;
+    right: -20px;
+    text-align: center; }
+
+
+
+h1 {
+  background: rgba(255,255,255,0.8);
+  box-shadow:0px 1px 10px 2px rgba(0,0,0,0.2);
+  border-bottom: 3px solid #00bfeb;
+  font-size: calc(1em + 1vmax);
+}
+.counter {
+  display: inline-flex;
+  cursor:pointer;
+  width:300px;
+  height:300px;
+  max-width:100%;
+  position:relative;
+  justify-content:center;
+  align-items:center;
+  font-size: calc(1em + 1vmin);
+  transition: height .2s ease-in-out;
+  background: #fff;
+  border-radius:50%;
+  box-shadow:0px 1px 10px 2px rgba(0,0,0,0.2);
+  margin:1em 0;
+}
+.percentage {
+  position:absolute;
+  text-align:center;
+  top:50%;
+  left:0;
+  right:0;
+  vertical-align:middle;
+  transform:translate3d(0,-50%,0);
+}
+canvas {
+  position:absolute;
+  top:0;
+  left:0;
+}
+input {
+    width: 200px;
+}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+</style>
+<style>
+body{margin-top:20px;}
+/*************** 1.Variables ***************/
+
+
+/* ------------------ Color Pallet ------------------ */
+
+
+/*************** 2.Mixins ***************/
+
+
+/************************************************
+    ************************************************
+										Search Box
+	************************************************
+************************************************/
+
+.chat-search-box {
+    -webkit-border-radius: 3px 0 0 0;
+    -moz-border-radius: 3px 0 0 0;
+    border-radius: 3px 0 0 0;
+    padding: .75rem 1rem;
+}
+
+.chat-search-box .input-group .form-control {
+    -webkit-border-radius: 2px 0 0 2px;
+    -moz-border-radius: 2px 0 0 2px;
+    border-radius: 2px 0 0 2px;
+    border-right: 0;
+}
+
+.chat-search-box .input-group .form-control:focus {
+    border-right: 0;
+}
+
+.chat-search-box .input-group .input-group-btn .btn {
+    -webkit-border-radius: 0 2px 2px 0;
+    -moz-border-radius: 0 2px 2px 0;
+    border-radius: 0 2px 2px 0;
+    margin: 0;
+}
+
+.chat-search-box .input-group .input-group-btn .btn i {
+    font-size: 1.2rem;
+    line-height: 100%;
+    vertical-align: middle;
+}
+
+@media (max-width: 767px) {
+    .chat-search-box {
+        display: none;
+    }
+}
+
+
+/************************************************
+	************************************************
+									Users Container
+	************************************************
+************************************************/
+
+.users-container {
+    position: relative;
+    padding: 1rem 0;
+    border-right: 1px solid #e6ecf3;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+
+/************************************************
+	************************************************
+											Users
+	************************************************
+************************************************/
+
+.users {
+    padding: 0;
+}
+
+.users .person {
+    position: relative;
+    width: 100%;
+    padding: 10px 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f4f8;
+}
+
+.users .person:hover {
+    background-color: #ffffff;
+    /* Fallback Color */
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#e9eff5), to(#ffffff));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(right, #e9eff5, #ffffff);
+    /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient(right, #e9eff5, #ffffff);
+    /* FF3.6 */
+    background-image: -ms-linear-gradient(right, #e9eff5, #ffffff);
+    /* IE10 */
+    background-image: -o-linear-gradient(right, #e9eff5, #ffffff);
+    /* Opera 11.10+ */
+    background-image: linear-gradient(right, #e9eff5, #ffffff);
+}
+
+.users .person.active-user {
+    background-color: #ffffff;
+    /* Fallback Color */
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f9fb), to(#ffffff));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(right, #f7f9fb, #ffffff);
+    /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image: -moz-linear-gradient(right, #f7f9fb, #ffffff);
+    /* FF3.6 */
+    background-image: -ms-linear-gradient(right, #f7f9fb, #ffffff);
+    /* IE10 */
+    background-image: -o-linear-gradient(right, #f7f9fb, #ffffff);
+    /* Opera 11.10+ */
+    background-image: linear-gradient(right, #f7f9fb, #ffffff);
+}
+
+.users .person:last-child {
+    border-bottom: 0;
+}
+
+.users .person .user {
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+}
+
+.users .person .user img {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.users .person .user .status {
+    width: 10px;
+    height: 10px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #e6ecf3;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.users .person .user .status.online {
+    background: #9ec94a;
+}
+
+.users .person .user .status.offline {
+    background: #c4d2e2;
+}
+
+.users .person .user .status.away {
+    background: #f9be52;
+}
+
+.users .person .user .status.busy {
+    background: #fd7274;
+}
+
+.users .person p.name-time {
+    font-weight: 600;
+    font-size: .85rem;
+    display: inline-block;
+}
+
+.users .person p.name-time .time {
+    font-weight: 400;
+    font-size: .7rem;
+    text-align: right;
+    color: #8796af;
+}
+
+@media (max-width: 767px) {
+    .users .person .user img {
+        width: 30px;
+        height: 30px;
+    }
+    .users .person p.name-time {
+        display: none;
+    }
+    .users .person p.name-time .time {
+        display: none;
+    }
+}
+
+
+/************************************************
+	************************************************
+									Chat right side
+	************************************************
+************************************************/
+
+.selected-user {
+    width: 100%;
+    padding: 0 15px;
+    min-height: 64px;
+    line-height: 64px;
+    border-bottom: 1px solid #e6ecf3;
+    -webkit-border-radius: 0 3px 0 0;
+    -moz-border-radius: 0 3px 0 0;
+    border-radius: 0 3px 0 0;
+}
+
+.selected-user span {
+    line-height: 100%;
+}
+
+.selected-user span.name {
+    font-weight: 700;
+}
+
+.chat-container {
+    position: relative;
+    padding: 1rem;
+}
+
+.chat-container li.chat-left,
+.chat-container li.chat-right {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+.chat-container li img {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+}
+
+.chat-container li .chat-avatar {
+    margin-right: 20px;
+}
+
+.chat-container li.chat-right {
+    justify-content: flex-end;
+}
+
+.chat-container li.chat-right > .chat-avatar {
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+.chat-container li .chat-name {
+    font-size: .75rem;
+    color: #999999;
+    text-align: center;
+}
+
+.chat-container li .chat-text {
+    padding: .4rem 1rem;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #ffffff;
+    font-weight: 70;
+    line-height: 130%;
+    position: relative;
+}
+
+.chat-container li .chat-text:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 10px;
+    left: -20px;
+    border: 10px solid;
+    border-color: transparent #ffffff transparent transparent;
+}
+
+.chat-container li.chat-right > .chat-text {
+    text-align: right;
+}
+
+.chat-container li.chat-right > .chat-text:before {
+    right: -20px;
+    border-color: transparent transparent transparent #ffffff;
+    left: inherit;
+}
+
+.chat-container li .chat-hour {
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: .75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 15px;
+}
+
+.chat-container li .chat-hour > span {
+    font-size: 10px;
+    color: #9ec94a;
+}
+
+.chat-container li.chat-right > .chat-hour {
+    margin: 0 15px 0 0;
+}
+
+@media (max-width: 767px) {
+    .chat-container li.chat-left,
+    .chat-container li.chat-right {
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+    .chat-container li img {
+        width: 32px;
+        height: 32px;
+    }
+    .chat-container li.chat-left .chat-avatar {
+        margin: 0 0 5px 0;
+        display: flex;
+        align-items: center;
+    }
+    .chat-container li.chat-left .chat-hour {
+        justify-content: flex-end;
+    }
+    .chat-container li.chat-left .chat-name {
+        margin-left: 5px;
+    }
+    .chat-container li.chat-right .chat-avatar {
+        order: -1;
+        margin: 0 0 5px 0;
+        align-items: center;
+        display: flex;
+        justify-content: right;
+        flex-direction: row-reverse;
+    }
+    .chat-container li.chat-right .chat-hour {
+        justify-content: flex-start;
+        order: 2;
+    }
+    .chat-container li.chat-right .chat-name {
+        margin-right: 5px;
+    }
+    .chat-container li .chat-text {
+        font-size: .6rem;
+    }
+}
+
+.chat-form {
+    padding: 15px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    border-top: 1px solid white;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.card {
+    border: 0;
+    background: #f4f5fb;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    box-shadow: none;
+}
+
+.img {
+    height: 70%;
+    width: 70%;
+}
+</style>
+<!-- Dashboard style -->
+
+<style>
+#graph_body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#chartdiv {
+  width: 100%;
+  height: 290px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+// Menu Trigger
+jQuery(document).ready(function($) {
+	//alert('Hi')
+	$('#menu-container').width('17%');
+	$('#div_content').width('83%');
+
+	$('#menuToggle').on('click', function(event) {
+		var windowWidth = $(window).width();
+		if (windowWidth<1010) { 
+			$('body').removeClass('open'); 
+			if (windowWidth<760){
+				$('#left-panel').slideToggle();
+				$('#menu-container').width('8%');
+				$('#div_content').width('92%');
+				
+			} else {
+				$('#left-panel').toggleClass('open-menu'); 
+				$('#menu-container').width('8%');
+				$('#div_content').width('92%');
+			} 
+		} else {
+			$('body').toggleClass('open');
+			$('#left-panel').removeClass('open-menu');
+
+			if ($('#menu-container').width() > '200') {
+			     //alert($('#menu-container').width());
+			     //alert('IF --> It should shrink to 8%');
+                             $('#menu-container').width('6%');
+                             $('#div_content').width('94%');
+
+			} else {
+			     //alert($('#menu-container').width());
+			     //alert('ELSE --> It should expand to 17%');
+                             $('#menu-container').width('17%');
+                             $('#div_content').width('83%');
+
+			}
+
+		} 
+			
+	});
+ 
+ 
+              // NLU Training Data - AJAX Method ///////////////////////////////////////////////////////////// 
+	      // Add dynamic input fields with button to capture entity values
+	      var max_fields      = 100; //maximum input boxes allowed
+	      var wrapper   	  = $("#input_fields_wrap"); //Fields (div) wrapper
+	      var add_button      = $("#add_field_button"); //Add button ID
+	      //var data = [];
+
+	      var x = 1; //initlal text box count
+	      $(add_button).click(function(e){ //on add input button click
+	        	e.preventDefault();
+		        if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			//alert(x);
+			$(wrapper).append('<div><input type="text" class="form-control" aria-required="true" style="height:30px; float:left; width:87%;" id="textbox' + x +'" name="mytext[]"/><a href="#" id="remove_field" style="float:right;" class="btn btn-outline-danger btn-sm">&nbsp;-&nbsp;</a></div>'); //add input box
+		        }
+	           });
+
+	                $(wrapper).on("click","#remove_field", function(e){ //user click on remove text
+		        e.preventDefault(); $(this).parent('div').remove(); x--;
+	           });
+
+	     $( "#save_training_data" ).click(function(e){ //get the entity field values with button click
+                //alert($('#textbox_static').val());    //first textbox is static
+		var msg = '';
+		var data = [];
+                data[0] = $('#input_intent').val();
+		//alert(data[0]);
+		data[1] = $('#textbox_static').val();
+		//alert(data[1]);
+		for(i=2; i<=x; i++){
+		  //alert(i);
+		  //alert($('#textbox' + i).val());
+                  data[i] = ($('#textbox' + i).val());     //get data from all dynamic texboxes
+	          //data.push($('#textbox' + i).val());
+		  //alert(data[i]);
+		}
+		//alert( JSON.stringify(data) );
+                //alert(JSON.stringify(data));
+	        //data = JSON.stringify(data);
+                data = JSON.stringify({ msgval: data, cust_name: "{{ customer_details.customer_domain }}" });
+                //alert(data);
+
+
+		// Clear fields after getting values for Ajax submission
+		//alert(data);
+                $.ajax({
+                  url: "{% url 'nlutrainingupdate' %}",
+		  contentType: 'application/json;charset=utf-8',
+		  data: data, 
+		  type: 'POST',
+		  dataType: 'json',
+		  traditional: 'true',
+		  success: function(response){
+                                $("#nlutraining").remove();
+                                html = $("<pre id='nlutraining'>" + response + "</pre>");
+                                $("#dynamic-context").append(html);
+			        $('#input_intent').val('');
+                                $('#textbox_static').val('');
+				$('#div_intent').hide();
+                                $('#div_entity').hide();
+                                $('#div_button_nlu').hide();
+			        for(i=2; i<=x; i++){
+                                    $('#textbox' + i).remove();
+				    $('#remove_field').remove();
+			         	}
+                                $('#form-response').show();
+
+		                 },
+		                 error: function(error){
+				       console.log(error);
+		          }
+                   });
+              });
+
+
+        // Show Intent and Entity capture divs
+          $( "#show_divs" ).click(function() {
+              $( "#div_intent" ).show( "slow" );
+              $( "#div_entity" ).show( "slow" );
+              $( "#div_button_nlu" ).show( "slow" );
+            });
+       
+
+           $( "#cancel_training" ).click(function() {
+              $( "#div_intent" ).hide( "slow" );
+              $( "#div_entity" ).hide( "slow" );
+              $( "#div_button_nlu" ).hide( "slow" );
+           });
+
+
+
+                // Response Data - AJAX Method ////////////////////////////////////////////////////////////
+	        // Add dynamic input fields with button to capture response values
+	        //var data = [];
+	        $( "#save_response_data" ).click(function(e){ //get the response field values with button click
+		      var data = [];
+                      data[0] = $('#input_response').val();
+		      data[1] = $('#textbox_static').val();
+                      //alert(data);
+	              //data = JSON.stringify(data);
+                      data = JSON.stringify({ msgval: data, cust_name: "{{ customer_details.customer_domain }}" });
+
+		      // Clear fields after getting values for Ajax submission
+		      //alert(data);
+                      $.ajax({
+                      url: "{% url 'responseupdate' %}",
+		      contentType: 'application/json;charset=utf-8',
+		      data: data, 
+		      type: 'POST',
+		      dataType: 'json',
+		      traditional: 'true',
+		      success: function(response){
+                                //alert(response);
+                                $("#response").remove();
+                                html = $("<pre id='response'>" + response + "</pre>");
+                                $("#dynamic-context").append(html);
+		                $('#input_response').val('');
+                                $('#textbox_static').val('');
+				$('#div_response_name').hide();
+				$('#div_response').hide();
+				$('#div_button_response').hide();
+                                $('#form-response').show();
+
+		      },
+		      error: function(error){
+				console.log(error);
+		    }
+                 });
+             });
+
+             // Show Response capture divs
+             $( "#show_divs" ).click(function() {
+                 $( "#div_response_name" ).show( "slow" );
+                 $( "#div_response" ).show( "slow" );
+                 $( "#div_button_response" ).show( "slow" );
+             });
+
+             $( "#cancel_response" ).click(function() {
+                 $( "#div_response_name" ).hide( "slow" );
+                 $( "#div_response" ).hide( "slow" );
+                 $( "#div_button_response" ).hide( "slow" );
+             });
+
+
+
+
+
+	     // Add dynamic input fields with button to capture response values
+	     //var data = '';
+
+	     $( "#save_stories_data" ).click(function(e){ //get the response field values with button click
+	               var data = '';
+                       data = $('#input_story_name').val();
+		       // Clear fields after getting values for Ajax submission
+		       //alert(data);
+		       //data = JSON.stringify(data);
+                       data = JSON.stringify({ msgval: data, cust_name: "{{ customer_details.customer_domain }}" });
+                       $.ajax({
+                              url: "{% url 'storiesupdate' %}",
+		              contentType: 'application/json;charset=utf-8',
+		              data: data,
+		              type: 'POST',
+		              dataType: 'json',
+		              traditional: 'true',
+		              success: function(response){
+				                $("#stories").remove();
+				                html = $("<pre id='stories'>" + response + "</pre>");
+				                $("#dynamic-context").append(html);
+				                $('#input_story_name').val('');
+                                                $('#div_story_name').hide();
+                                                $('#div_button_stories').hide();
+		                              },
+                               error: function(error){
+				               console.log(error);
+		              }
+               });
+         });
+
+
+               // Show Response capture divs
+                $( "#show_divs_stories" ).click(function() {
+                       $( "#div_story_name" ).show( "slow" );
+                       $( "#div_button_stories" ).show( "slow" );
+                });
+
+
+
+                $( "#cancel_stories" ).click(function() {
+                       $( "#div_story_name" ).hide( "slow" );
+                       $( "#div_button_stories" ).hide( "slow" );
+                });
+
+});
+</script>
+<!-- Train Bot - Animation and Ajax -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var circleProgress = (function(selector) {
+    var wrapper = document.querySelectorAll(selector);
+    Array.prototype.forEach.call(wrapper, function(wrapper, i) {
+      var wrapperWidth,
+        wrapperHeight,
+        percent,
+        innerHTML,
+        context,
+        lineWidth,
+        centerX,
+        centerY,
+        radius,
+        newPercent,
+        speed,
+        from,
+        to,
+        duration,
+        start,
+        strokeStyle,
+        text;
+
+      var getValues = function() {
+        wrapperWidth = parseInt(window.getComputedStyle(wrapper).width);
+        wrapperHeight = wrapperWidth;
+        percent = wrapper.getAttribute('data-cp-percentage');
+        innerHTML = '<span class="percentage"><strong>' + percent + '</strong> %</span><canvas class="circleProgressCanvas" width="' + (wrapperWidth * 2) + '" height="' + wrapperHeight * 2 + '"></canvas>';
+        wrapper.innerHTML = innerHTML;
+        text = wrapper.querySelector(".percentage");
+        canvas = wrapper.querySelector(".circleProgressCanvas");
+        wrapper.style.height = canvas.style.width = canvas.style.height = wrapperWidth + "px";
+        context = canvas.getContext('2d');
+        centerX = canvas.width / 2;
+        centerY = canvas.height / 2;
+        newPercent = 0;
+        speed = 1;
+        from = 0;
+        to = percent;
+        duration = 60000;
+        lineWidth = 25;
+        radius = canvas.width / 2 - lineWidth;
+        strokeStyle = wrapper.getAttribute('data-cp-color');
+        start = new Date().getTime();
+      };
+
+      function animate() {
+        requestAnimationFrame(animate);
+        var time = new Date().getTime() - start;
+        if (time <= duration) {
+          var x = easeInOutQuart(time, from, to - from, duration);
+          newPercent = x;
+          text.innerHTML = Math.round(newPercent) + " %";
+          drawArc();
+        }
+      }
+
+      function drawArc() {
+        var circleStart = 1.5 * Math.PI;
+        var circleEnd = circleStart + (newPercent / 50) * Math.PI;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.beginPath();
+        context.arc(centerX, centerY, radius, circleStart, 4 * Math.PI, false);
+        context.lineWidth = lineWidth;
+        context.strokeStyle = "#ddd";
+        context.stroke();
+        context.beginPath();
+        context.arc(centerX, centerY, radius, circleStart, circleEnd, false);
+        context.lineWidth = lineWidth;
+        context.strokeStyle = strokeStyle;
+        context.stroke();
+
+      }
+      var update = function() {
+        getValues();
+        animate();
+      }
+      update();
+
+      var btnUpdate = document.querySelectorAll("#btn-update")[0];
+      btnUpdate.addEventListener("click", function() {
+        wrapper.setAttribute("data-cp-percentage", "100");
+        update();
+      });
+      wrapper.addEventListener("click", function() {
+        update();
+      });
+
+      var resizeTimer;
+      window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          clearTimeout(resizeTimer);
+          start = new Date().getTime();
+          update();
+        }, 250);
+      });
+    });
+
+    function easeInOutQuart(t, b, c, d) {
+      if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+      return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+    }
+
+  });
+
+  circleProgress('.counter');
+
+  // Gibt eine Zufallszahl zwischen min (inklusive) und max (exklusive) zurÃ¼ck
+  function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+});
+
+// Show progress circle on button_click
+$(document).ready(function() {
+   $( "#btn-update" ).click(function() {
+     //alert('Hi');
+     var data = 'start training';
+     //data = JSON.stringify(data);
+     data = JSON.stringify({ msgval: data, cust_name: "{{ customer_details.customer_domain }}" });
+     $( "#load_progress" ).show();
+     $.ajax({
+        url: "{% url 'trainbot' %}",
+        contentType: 'application/json;charset=utf-8',
+        data: data,
+        type: 'POST',
+        dataType: 'text',
+        traditional: 'true',
+        success: function(response){
+         //alert(response)
+                 console.log(response);
+
+                 },
+         error: function(error){
+                  console.log(error);
+                 }
+       });
+
+    });
+});
+</script>
+<!-- Chat Hitory - Messaging -->
+<script>
+$(document).ready(function() {
+
+     var data 		= '';
+     $('.time').click(function() {
+	     //alert(this.value);
+	     //data1 = JSON.stringify(this.value);
+         //alert(data1);
+         data = JSON.stringify({ msgval: this.value, cust_name: "{{ customer_details.customer_domain }}" });
+         //alert(data);
+	     $(".chat-left").remove();
+             $(".chat-right").remove();
+             $(".chat-avatar").remove();
+             $(".chat-name").remove();
+             $(".chat-text").remove();
+             $(".chat-hour").remove();
+
+
+	     $.ajax({
+             url: "{% url 'chathistoryupdate' %}",
+             contentType: 'application/json;charset=utf-8',
+             data: data,
+             type: 'POST',
+             dataType: 'json',
+             traditional: 'true',
+             success: function(response){
+		     //alert(response);
+                      $.each(JSON.parse(response),function(key,value){
+			    //alert('inside foreach');
+			    var key_time = key;
+			    //alert(key + "-+-" + value);
+			    var value1 = value;
+			    $.each(value1,function(key,value){
+				  //alert(key);
+				  var dt_key = key;
+				  //alert(value);
+				  var value2 = value;
+				  $.each(value2,function(key,value){
+                                       // alert(key);
+					//alert(value);
+					var arr = $.makeArray( value );
+				        //alert('value added to array')
+					$.each(value2,function(key,value){
+					      //alert(key + "--" + value);
+					      var dt = eval(key_time*1000);
+                                              var myDate = new Date(dt);
+					      //alert(myDate)
+					      conv_time = myDate.toLocaleString()
+                                              //alert(myDate.toLocaleString())
+					      //alert(value);
+					      if(key == 'user'){
+                                                   //$('#user_conv').val(value);
+						   html = $("<li class='chat-left'><div class='chat-avatar'><img src='https://www.lococrossfit.com/wp-content/uploads/2019/02/user-icon-300x300.png'/><div class='chat-name'>User</div></div><div class='chat-text'>" + value + "</div><div class='chat-hour'>" + conv_time + "<span class='fa fa-check-circle'></span></div></div></li>");
+
+                                                   //alert($(".chat-container").hasClass( 'chat-left' ));
+						   $(".chat-container").append(html);
+			                 }
+				              if(key == 'bot'){
+                                                   //$('#bot_conv').val(value);
+						   html = $("<li class='chat-right'><div class='chat-hour'>" + conv_time + "<span class='fa fa-check-circle'></span></div><div class='chat-text'>" + value + "</output></div><div class='chat-avatar'><img src='https://esportsone.com/wp-content/uploads/2019/08/one_bot_icon.png'/><div class='chat-name'>Bot</div></div></li>");
+
+						   $(".chat-container").append(html);
+                                        }
+			           });
+		               });
+			   });
+                       });
+                      //console.log(response);
+             },
+             error: function(error){
+                      //console.log(error);
+             }
+         });
+     });
+
+});
+</script>
+<!-- Dashboard Script -->
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+// Add data
+chart.data = generateChartData();
+
+// Create axes
+var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+dateAxis.renderer.minGridDistance = 50;
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+// Create series
+var series = chart.series.push(new am4charts.LineSeries());
+series.dataFields.valueY = "visits";
+series.dataFields.dateX = "date";
+series.strokeWidth = 2;
+series.minBulletDistance = 10;
+series.tooltipText = "{valueY}";
+series.tooltip.pointerOrientation = "vertical";
+series.tooltip.background.cornerRadius = 20;
+series.tooltip.background.fillOpacity = 0.5;
+series.tooltip.label.padding(12,12,12,12)
+
+// Add scrollbar
+chart.scrollbarX = new am4charts.XYChartScrollbar();
+chart.scrollbarX.series.push(series);
+
+// Add cursor
+chart.cursor = new am4charts.XYCursor();
+chart.cursor.xAxis = dateAxis;
+chart.cursor.snapToSeries = series;
+
+function generateChartData() {
+    var dict = {{timeline_val | safe}};
+    var minDate = new Date(parseInt('{{min_date}}')*1000);
+    var chartData = [];
+    var firstDate = new Date();
+    firstDate.setDate(firstDate.getDate() - 0);
+    var visits = 0;
+    var loop_count = (Math.ceil(Math.abs(firstDate - minDate) / (1000 * 60 * 60 * 24)) + 1);
+    for (var i = 0; i < loop_count; i++) {
+        var newDate = new Date();
+	newDate.setDate(newDate.getDate() - Math.ceil(Math.abs(firstDate - minDate) / (1000 * 60 * 60 * 24)));
+        newDate.setDate(newDate.getDate() + i);
+	for (const [key, value] of Object.entries(dict)) {
+		if (newDate.getDate() == new Date(parseInt(key)*1000).getDate()){
+                      visits = parseInt(value);
+		      break;
+		} else {
+                      visits = 0;
+		      continue;
+		}
+         }
+        chartData.push({
+            date: newDate,
+            visits: visits
+        });
+    }
+    return chartData;
+}
+
+}); // end am4core.ready()
+</script>
+{% endblock head %}
+
+{% block extended_menu %}
+<div class="row">
+<div id="menu-container" style="align:left; margin-left:0%; height:87vh;">
+    <aside id="left-panel-custom" class="left-panel-custom">
+        <nav class="navbar navbar-expand-sm navbar-default" style="height:87vh;">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'CustomerDashboard' customer_details.id %}"><i class="menu-icon fa fa-bar-chart-o"></i>Dashboard </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'CustomerSettings' customer_details.id %}"> <i class="menu-icon fa fa-cogs"></i>Settings</a>
+                    </li>
+                   
+
+		    <li >
+                        <a href="{% url 'CustomerNLUTraining' customer_details.id %}" > <i class="menu-icon fa fa-comment"></i>NLU Training</a>
+                    </li>
+
+		    <li >
+                        <a href="{% url 'CustomerResponse' customer_details.id %}" > <i class="menu-icon fa fa-edit (alias)"></i>Response</a>
+                    </li>
+
+		    <li >
+                        <a href="{% url 'CustomerStories' customer_details.id %}" > <i class="menu-icon fa fa-book"></i>Stories</a>
+                    </li>
+
+		    <li >
+                        <a href="{% url 'CustomerDomain' customer_details.id %}" > <i class="menu-icon fa fa-list-alt"></i>Domain</a>
+                    </li>
+
+		    <li >
+                        <a href="{% url 'CustomerConfiguration' customer_details.id %}" > <i class="menu-icon fa fa-file"></i>Configuration</a>
+                    </li>
+
+		    <li >
+                        <a href="{% url 'CustomerLogs' customer_details.id %}" > <i class="menu-icon fa fa-align-justify"></i>Logs</a>
+                    </li>
+
+                    <li >
+                        <a href="{% url 'CustomerTrainBot' customer_details.id %}" > <i class="menu-icon fa fa-hourglass"></i>Train Bot</a>
+                    </li>
+
+                    <li >
+                        <a href="{% url 'CustomerLicense' customer_details.id %}" > <i class="menu-icon fa fa-certificate"></i>License</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'CustomerMessages' customer_details.id %}"> <i class="menu-icon fa fa-comments"></i>Messages </a>
+                    </li>
+
+                  
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+   </aside>
+</div>
+<div id="div_content">
+ {% block div_content %} {% endblock %}
+</div>	
+</div>
+{% endblock %}
+
+
+{% block chatwidget %}
+<div class="col-lg-12" id="webchat" />
+<script src="{% static '/dashboard/assets/js/webchat-latest.js' %}"></script>
+<script>
+   WebChat.default.init({
+   selector: "#webchat",
+   initPayload: "hi",
+   interval: 1000, // 1000 ms between each message
+   customData: { language: "en" }, // arbitrary custom data. Stay minimal as this will be added to the socket
+   socketUrl: "https://{% filter lower %}{{ customer_details.customer_domain }}{% endfilter %}",
+   socketPath: "/socket.io/",
+   title: "{{ customer_details.Application_name }}",
+   showMessageDate: true,
+   subtitle: "Happy to Help Always",
+   inputTextFieldHint: "Type a message...",
+   docViewer: "true",
+   customComponent: "Powered by Marvin AI",
+   profileAvatar:"https://esportsone.com/wp-content/uploads/2019/08/one_bot_icon.png"
+ });
+</script>
+{% endblock %}
